@@ -100,59 +100,58 @@
     </div>
   </div>
 
-<script>
-  function generateDummyProblems(subcatName, startIndex) {
-    const problems = [];
-    for (let i = 1; i <= 20; i++) {
-      if (subcatName === "Linked List" && (i === 1 || i === 2)) continue; // skip first 2 real problems
 
-      const problemName = `${subcatName} Problem ${startIndex + i}`;
+
+  <script>
+  function generateDummyProblems(categoryName, startIndex) {
+    const problems = [];
+    for (let i = 3; i <= 20; i++) {
+      const problemName = `${categoryName} Problem ${startIndex + i}`;
       const code = `// Code for ${problemName}
 public class Solution {
   public void solve() {
     System.out.println("Solving ${problemName}");
   }
 }`;
-      problems.push({
-        name: problemName,
-        code: code
-      });
+      problems.push({ name: problemName, code });
     }
     return problems;
   }
 
   const categories = [
-    {
-      name: "Dynamic Programming",
-      subcategories: [
-        { name: "Linked List" },
-        { name: "Binary Search" },
-        { name: "Stack and Queue" },
-      ]
-    },
-    {
-      name: "Two Pointers",
-      subcategories: [
-        { name: "Simple" },
-        { name: "Trickey" },
-      ]
-    }
+    { name: "Linked List", problems: [] },
+    { name: "Binary Search", problems: [] },
+    { name: "Stack and Queue", problems: [] },
+    { name: "Two Pointer", problems: [] },
+    { name: "Simple Problem", problems: [] },
+    { name: "Trickey Question", problems: [] }
   ];
 
-  let runningIndex = 0;
-  categories.forEach(cat => {
-    cat.subcategories.forEach(subcat => {
-      subcat.problems = generateDummyProblems(subcat.name, runningIndex);
-      runningIndex += 20;
-    });
-  });
+  // Add 2 real problems to Linked List category
+  const linkedListCategory = categories.find(cat => cat.name === "Linked List");
+  linkedListCategory.problems.push(
+    {
+      name: "Detect cycle in linked list",
+      code: `public ListNode detectCycle(ListNode head) {
+    ListNode slow = head, fast = head;
 
-  // Insert custom problems in Linked List subcategory
-  const linkedListSubcat = categories[0].subcategories.find(sc => sc.name === "Linked List");
-
-  linkedListSubcat.problems.unshift({
-    name: "Intersection of Two Linked List",
-    code: `public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+    while (fast != null && fast.next != null) {
+      fast = fast.next.next;
+      slow = slow.next;
+      if (slow == fast) {
+        while (head != slow) {
+          head = head.next;
+          slow = slow.next;
+        }
+        return slow;
+      }
+    }
+    return null;
+}`
+    },
+    {
+      name: "Intersection of Two Linked List",
+      code: `public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
     int a = getListLength(headA);
     int b = getListLength(headB);
 
@@ -180,26 +179,17 @@ private int getListLength(ListNode head) {
     }
     return len;
 }`
-  });
-
-  linkedListSubcat.problems.unshift({
-    name: "Detect cycle in linked list",
-    code: `public ListNode detectCycle(ListNode head) {
-    ListNode slow = head, fast = head;
-
-    while (fast != null && fast.next != null) {
-      fast = fast.next.next;
-      slow = slow.next;
-      if (slow == fast) {
-        while (head != slow) {
-          head = head.next;
-          slow = slow.next;
-        }
-        return slow;
-      }
     }
-    return null;
-}`
+  );
+
+  // Add 18 dummy problems to Linked List
+  linkedListCategory.problems.push(...generateDummyProblems("Linked List", 2));
+
+  // Add 20 dummy problems to all other categories
+  categories.forEach((cat, index) => {
+    if (cat.name !== "Linked List") {
+      cat.problems = generateDummyProblems(cat.name, 0);
+    }
   });
 
   const tbody = document.getElementById("problem-table");
@@ -210,22 +200,15 @@ private int getListLength(ListNode head) {
     catRow.innerHTML = `<td colspan="2">${category.name}</td>`;
     tbody.appendChild(catRow);
 
-    category.subcategories.forEach(subcat => {
-      const subcatRow = document.createElement("tr");
-      subcatRow.classList.add("subcategory-row");
-      subcatRow.innerHTML = `<td colspan="2">${subcat.name}</td>`;
-      tbody.appendChild(subcatRow);
+    category.problems.forEach(problem => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${problem.name}</td>
+        <td><button class="code-btn">Code</button></td>
+      `;
+      tbody.appendChild(row);
 
-      subcat.problems.forEach(problem => {
-        const row = document.createElement("tr");
-        row.innerHTML = `
-          <td>${problem.name}</td>
-          <td><button class="code-btn">Code</button></td>
-        `;
-        tbody.appendChild(row);
-
-        row.querySelector('button').addEventListener('click', () => showCode(problem.code));
-      });
+      row.querySelector('button').addEventListener('click', () => showCode(problem.code));
     });
   });
 
@@ -240,6 +223,7 @@ private int getListLength(ListNode head) {
     document.getElementById("codeModal").style.display = "none";
   }
 </script>
+
 
 
 
