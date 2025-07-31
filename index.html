@@ -100,59 +100,91 @@
     </div>
   </div>
 
-  <script>
-    function generateDummyProblems(subcatName, startIndex) {
-      const problems = [];
-      for (let i = 1; i <= 20; i++) {
-        // Skip index 1 in Linked List — will replace manually
-        if (subcatName === "Linked List" && i === 1) continue;
+<script>
+  function generateDummyProblems(subcatName, startIndex) {
+    const problems = [];
+    for (let i = 1; i <= 20; i++) {
+      if (subcatName === "Linked List" && (i === 1 || i === 2)) continue; // skip first 2 real problems
 
-        const problemName = `${subcatName} Problem ${startIndex + i}`;
-        const code = `// Code for ${problemName}
+      const problemName = `${subcatName} Problem ${startIndex + i}`;
+      const code = `// Code for ${problemName}
 public class Solution {
   public void solve() {
     System.out.println("Solving ${problemName}");
   }
 }`;
-        problems.push({
-          name: problemName,
-          code: code
-        });
-      }
-      return problems;
+      problems.push({
+        name: problemName,
+        code: code
+      });
+    }
+    return problems;
+  }
+
+  const categories = [
+    {
+      name: "Dynamic Programming",
+      subcategories: [
+        { name: "Linked List" },
+        { name: "Binary Search" },
+        { name: "Stack and Queue" },
+      ]
+    },
+    {
+      name: "Two Pointers",
+      subcategories: [
+        { name: "Simple" },
+        { name: "Trickey" },
+      ]
+    }
+  ];
+
+  let runningIndex = 0;
+  categories.forEach(cat => {
+    cat.subcategories.forEach(subcat => {
+      subcat.problems = generateDummyProblems(subcat.name, runningIndex);
+      runningIndex += 20;
+    });
+  });
+
+  // Insert custom problems in Linked List subcategory
+  const linkedListSubcat = categories[0].subcategories.find(sc => sc.name === "Linked List");
+
+  linkedListSubcat.problems.unshift({
+    name: "Intersection of Two Linked List",
+    code: `public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+    int a = getListLength(headA);
+    int b = getListLength(headB);
+
+    while (a > b) {
+      headA = headA.next;
+      a--;
+    }
+    while (b > a) {
+      headB = headB.next;
+      b--;
+    }
+    while (headA != headB) {
+      headA = headA.next;
+      headB = headB.next;
     }
 
-    const categories = [
-      {
-        name: "Dynamic Programming",
-        subcategories: [
-          { name: "Linked List" },
-          { name: "Binary Search" },
-          { name: "Stack and Queue" },
-        ]
-      },
-      {
-        name: "Two Pointers",
-        subcategories: [
-          { name: "Simple" },
-          { name: "Trickey" },
-        ]
-      }
-    ];
+    return headB;
+}
 
-    let runningIndex = 0;
-    categories.forEach(cat => {
-      cat.subcategories.forEach(subcat => {
-        subcat.problems = generateDummyProblems(subcat.name, runningIndex);
-        runningIndex += 20;
-      });
-    });
+private int getListLength(ListNode head) {
+    int len = 0;
+    while (head != null) {
+      len++;
+      head = head.next;
+    }
+    return len;
+}`
+  });
 
-    // Insert your custom problem at the start of Linked List subcategory
-    const linkedListSubcat = categories[0].subcategories.find(sc => sc.name === "Linked List");
-    linkedListSubcat.problems.unshift({
-      name: "Detect cycle in linked list",
-      code: `public ListNode detectCycle(ListNode head) {
+  linkedListSubcat.problems.unshift({
+    name: "Detect cycle in linked list",
+    code: `public ListNode detectCycle(ListNode head) {
     ListNode slow = head, fast = head;
 
     while (fast != null && fast.next != null) {
@@ -168,49 +200,49 @@ public class Solution {
     }
     return null;
 }`
-    });
+  });
 
-    const tbody = document.getElementById("problem-table");
+  const tbody = document.getElementById("problem-table");
 
-    categories.forEach(category => {
-      // Category header row
-      const catRow = document.createElement("tr");
-      catRow.classList.add("category-row");
-      catRow.innerHTML = `<td colspan="2">${category.name}</td>`;
-      tbody.appendChild(catRow);
+  categories.forEach(category => {
+    const catRow = document.createElement("tr");
+    catRow.classList.add("category-row");
+    catRow.innerHTML = `<td colspan="2">${category.name}</td>`;
+    tbody.appendChild(catRow);
 
-      category.subcategories.forEach(subcat => {
-        // Subcategory row
-        const subcatRow = document.createElement("tr");
-        subcatRow.classList.add("subcategory-row");
-        subcatRow.innerHTML = `<td colspan="2">${subcat.name}</td>`;
-        tbody.appendChild(subcatRow);
+    category.subcategories.forEach(subcat => {
+      const subcatRow = document.createElement("tr");
+      subcatRow.classList.add("subcategory-row");
+      subcatRow.innerHTML = `<td colspan="2">${subcat.name}</td>`;
+      tbody.appendChild(subcatRow);
 
-        // Problems for this subcategory
-        subcat.problems.forEach(problem => {
-          const row = document.createElement("tr");
-          row.innerHTML = `
-            <td>${problem.name}</td>
-            <td><button class="code-btn">Code</button></td>
-          `;
-          tbody.appendChild(row);
+      subcat.problems.forEach(problem => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${problem.name}</td>
+          <td><button class="code-btn">Code</button></td>
+        `;
+        tbody.appendChild(row);
 
-          // Attach event listener safely
-          row.querySelector('button').addEventListener('click', () => showCode(problem.code));
-        });
+        row.querySelector('button').addEventListener('click', () => showCode(problem.code));
       });
     });
+  });
 
-    function showCode(code) {
-      const modal = document.getElementById("codeModal");
-      const codeText = document.getElementById("codeText");
-      codeText.textContent = code || "// Code not added yet";
-      modal.style.display = "flex";
-    }
+  function showCode(code) {
+    const modal = document.getElementById("codeModal");
+    const codeText = document.getElementById("codeText");
+    codeText.textContent = code || "// Code not added yet";
+    modal.style.display = "flex";
+  }
 
-    function closeModal() {
-      document.getElementById("codeModal").style.display = "none";
-    }
-  </script>
+  function closeModal() {
+    document.getElementById("codeModal").style.display = "none";
+  }
+</script>
+
+
+
+  
 </body>
 </html>
