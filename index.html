@@ -40,23 +40,28 @@
     }
     .modal {
       display: none;
-      position: fixed;
-      z-index: 999;
-      left: 0; top: 0;
-      width: 100%; height: 100%;
-      background-color: rgba(0,0,0,0.8);
-      justify-content: center;
-      align-items: center;
+  position: fixed;
+  z-index: 999;
+  left: 0; top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.8);
+  display: flex;          /* Use flexbox for centering */
+  justify-content: center;
+  align-items: center;
     }
     .modal-content {
-      background: white; 
-      color: black;
-      padding: 20px;
-      border-radius: 8px;
-      min-width: 300px;
-      max-width: 90%;
-      max-height: 90vh;
-      overflow: auto;
+      background: white;
+  color: black;
+  padding: 30px;
+  border-radius: 8px;
+  width: 90vw;        /* Wider width relative to viewport */
+  height: 80vh;       /* Taller height relative to viewport */
+  max-width: none;    /* Remove max-width limit */
+  max-height: none;   /* Remove max-height limit */
+  overflow: auto;     /* Scroll if content is too big */
+  box-sizing: border-box;
+  font-size: 16px;    /* Slightly bigger font for readability */
     }
     .close-btn {
       float: right;
