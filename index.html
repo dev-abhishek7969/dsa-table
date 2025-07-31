@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>DSA Problem Table</title>
   <style>
     body {
@@ -24,6 +24,7 @@
     .category-row {
       background-color: #333;
       font-weight: bold;
+      cursor: pointer;
     }
     .code-btn {
       background-color: #007bff;
@@ -81,7 +82,6 @@
     }
     .category-row:hover {
       background-color: #444;
-      cursor: pointer;
     }
   </style>
 </head>
@@ -102,7 +102,7 @@
   <script>
     function generateDummyProblems(categoryName, startIndex) {
       const problems = [];
-      for (let i = 1; i <= 6 - startIndex; i++) {
+      for (let i = 1; i <= 20 - startIndex; i++) {
         const problemName = `${categoryName} Problem ${startIndex + i}`;
         const code = `// Code for ${problemName}
 public class Solution {
@@ -124,7 +124,7 @@ public class Solution {
       { name: "Trickey Question", problems: [] }
     ];
 
-    // Real problems for Linked List
+    // Linked List problems
     const linkedListCategory = categories.find(cat => cat.name === "Linked List");
     linkedListCategory.problems.push(
       {
@@ -179,7 +179,7 @@ private int getListLength(ListNode head) {
     );
     linkedListCategory.problems.push(...generateDummyProblems("Linked List", 2));
 
-    // Real problem for Binary Search
+    // Binary Search problems
     const binarySearchCategory = categories.find(cat => cat.name === "Binary Search");
     binarySearchCategory.problems = [
       {
@@ -204,7 +204,7 @@ private int getListLength(ListNode head) {
       ...generateDummyProblems("Binary Search", 1)
     ];
 
-    // Real problem for Stack and Queue
+    // Stack and Queue problems
     const stackQueueCategory = categories.find(cat => cat.name === "Stack and Queue");
     stackQueueCategory.problems = [
       {
@@ -239,9 +239,39 @@ private int getListLength(ListNode head) {
   public int getMin() {
     return minStack.peek();
   }
-}`
+}`,
       },
-      ...generateDummyProblems("Stack and Queue", 1)
+      {
+        name: "Implement Stack using Queues",
+        code: `class MyStack {
+
+  private Queue<Integer> queue;
+
+  public MyStack() {
+    queue = new LinkedList<>();
+  }
+
+  public void push(int x) {
+    queue.add(x);
+    for (int i = 1; i < queue.size(); i++) {
+      queue.add(queue.remove());
+    }
+  }
+
+  public int pop() {
+    return queue.remove();
+  }
+
+  public int top() {
+    return queue.peek();
+  }
+
+  public boolean empty() {
+    return queue.isEmpty();
+  }
+}`,
+      },
+      ...generateDummyProblems("Stack and Queue", 2)
     ];
 
     // Fill others with dummy problems
