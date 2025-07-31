@@ -163,13 +163,15 @@ public class Solution {
 
         // Problems for this subcategory
         subcat.problems.forEach(problem => {
-          const row = document.createElement("tr");
-          row.innerHTML = `
-            <td>${problem.name}</td>
-            <td><button class="code-btn" onclick="showCode(\`${problem.code}\`)">Code</button></td>
-          `;
-          tbody.appendChild(row);
-        });
+  const row = document.createElement("tr");
+  row.innerHTML = `
+    <td>${problem.name}</td>
+    <td><button class="code-btn">Code</button></td>
+  `;
+  tbody.appendChild(row);
+
+  row.querySelector('button').addEventListener('click', () => showCode(problem.code));
+});
       });
     });
 
