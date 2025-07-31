@@ -104,6 +104,9 @@
     function generateDummyProblems(subcatName, startIndex) {
       const problems = [];
       for (let i = 1; i <= 20; i++) {
+        // Skip index 1 in Linked List — will replace manually
+        if (subcatName === "Linked List" && i === 1) continue;
+
         const problemName = `${subcatName} Problem ${startIndex + i}`;
         const code = `// Code for ${problemName}
 public class Solution {
@@ -145,6 +148,28 @@ public class Solution {
       });
     });
 
+    // Insert your custom problem at the start of Linked List subcategory
+    const linkedListSubcat = categories[0].subcategories.find(sc => sc.name === "Linked List");
+    linkedListSubcat.problems.unshift({
+      name: "Detect cycle in linked list",
+      code: `public ListNode detectCycle(ListNode head) {
+    ListNode slow = head, fast = head;
+
+    while (fast != null && fast.next != null) {
+      fast = fast.next.next;
+      slow = slow.next;
+      if (slow == fast) {
+        while (head != slow) {
+          head = head.next;
+          slow = slow.next;
+        }
+        return slow;
+      }
+    }
+    return null;
+}`
+    });
+
     const tbody = document.getElementById("problem-table");
 
     categories.forEach(category => {
@@ -163,15 +188,16 @@ public class Solution {
 
         // Problems for this subcategory
         subcat.problems.forEach(problem => {
-  const row = document.createElement("tr");
-  row.innerHTML = `
-    <td>${problem.name}</td>
-    <td><button class="code-btn">Code</button></td>
-  `;
-  tbody.appendChild(row);
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td>${problem.name}</td>
+            <td><button class="code-btn">Code</button></td>
+          `;
+          tbody.appendChild(row);
 
-  row.querySelector('button').addEventListener('click', () => showCode(problem.code));
-});
+          // Attach event listener safely
+          row.querySelector('button').addEventListener('click', () => showCode(problem.code));
+        });
       });
     });
 
