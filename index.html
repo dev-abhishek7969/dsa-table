@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>DSA Problems</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DSA Problems with Categories</title>
   <style>
     body {
       font-family: sans-serif;
@@ -24,6 +24,12 @@
     th:nth-child(2), td:nth-child(2) {
       width: 80px;
     }
+    .category-row {
+      background-color: #333;
+      font-weight: bold;
+      text-align: center;
+      color: #ff00ff;
+    }
     .code-btn {
       background-color: black;
       border: 2px solid magenta;
@@ -43,14 +49,14 @@
       align-items: center;
     }
     .modal-content {
-     background: white;
-  color: black;
-  padding: 20px;
-  border-radius: 8px;
-  min-width: 300px;
-  max-width: 90%; /* or use a fixed size like 1000px */
-  max-height: 90vh;
-  overflow: auto; /* Adds scroll if content is large */
+      background: white; 
+      color: black;
+      padding: 20px;
+      border-radius: 8px;
+      min-width: 300px;
+      max-width: 90%;
+      max-height: 90vh;
+      overflow: auto;
     }
     .close-btn {
       float: right;
@@ -64,19 +70,19 @@
       background: #f4f4f4;
       padding: 10px;
       border-radius: 5px;
+      margin-top: 10px;
     }
   </style>
 </head>
 <body>
-  <h1>Ultimate DSA Problems</h1>
+  <h1>Ultimate DSA Problems with Categories</h1>
   <table>
-    <tr><th>Problem</th><th>Code</th></tr>
-    <tbody id="problem-table">
-      <!-- JS will populate rows here -->
-    </tbody>
+    <thead>
+      <tr><th>Problem</th><th>Code</th></tr>
+    </thead>
+    <tbody id="problem-table"></tbody>
   </table>
 
-  <!-- Popup Modal -->
   <div id="codeModal" class="modal">
     <div class="modal-content">
       <span class="close-btn" onclick="closeModal()">×</span>
@@ -85,72 +91,20 @@
   </div>
 
   <script>
-    const problems = [
+    const categories = [
       {
-        name: "Fibonacci Number",
-        code: `public int fib(int n) {
-  if (n <= 1) return n;
-  return fib(n - 1) + fib(n - 2);
-}`
-      },
-      {
-        name: "Factorial",
-        code: `public int factorial(int n) {
-  if (n == 0) return 1;
-  return n * factorial(n - 1);
-}`
-      },
-      {
-        name: "Reverse a String",
-        code: `public String reverse(String str) {
-  if (str.isEmpty()) return str;
-  return reverse(str.substring(1)) + str.charAt(0);
-}`
-      },
-      {
-        name: "Check Palindrome",
-        code: `public boolean isPalindrome(String s) {
-  int l = 0, r = s.length() - 1;
-  while (l < r) {
-    if (s.charAt(l++) != s.charAt(r--)) return false;
-  }
-  return true;
-}`
-      },
-      {
-        name: "Binary Search",
-        code: `public int binarySearch(int[] arr, int target) {
-  int left = 0, right = arr.length - 1;
-  while (left <= right) {
-    int mid = left + (right - left) / 2;
-    if (arr[mid] == target) return mid;
-    else if (arr[mid] < target) left = mid + 1;
-    else right = mid - 1;
-  }
-  return -1;
-}`
-      },
-      {
-        name: "Merge Sort",
-        code: `public void mergeSort(int[] arr, int l, int r) {
-  if (l < r) {
-    int m = (l + r) / 2;
-    mergeSort(arr, l, m);
-    mergeSort(arr, m + 1, r);
-    merge(arr, l, m, r);
-  }
-}`
-      },
-      {
-        name: "Climbing Stairs",
-        code: `public int climbStairs(int n) {
+        name: "Dynamic Programming",
+        problems: [
+          {
+            name: "Climbing Stairs",
+            code: `public int climbStairs(int n) {
   if (n <= 2) return n;
   return climbStairs(n - 1) + climbStairs(n - 2);
 }`
-      },
-      {
-        name: "House Robber",
-        code: `public int rob(int[] nums) {
+          },
+          {
+            name: "House Robber",
+            code: `public int rob(int[] nums) {
   if (nums.length == 0) return 0;
   if (nums.length == 1) return nums[0];
   int[] dp = new int[nums.length];
@@ -161,10 +115,10 @@
   }
   return dp[nums.length - 1];
 }`
-      },
-      {
-        name: "Max Subarray (Kadane’s)",
-        code: `public int maxSubArray(int[] nums) {
+          },
+          {
+            name: "Max Subarray (Kadane’s)",
+            code: `public int maxSubArray(int[] nums) {
   int max = nums[0], curr = nums[0];
   for (int i = 1; i < nums.length; i++) {
     curr = Math.max(nums[i], curr + nums[i]);
@@ -172,10 +126,25 @@
   }
   return max;
 }`
+          }
+        ]
       },
       {
-        name: "Two Sum",
-        code: `public int[] twoSum(int[] nums, int target) {
+        name: "Two Pointers",
+        problems: [
+          {
+            name: "Check Palindrome",
+            code: `public boolean isPalindrome(String s) {
+  int l = 0, r = s.length() - 1;
+  while (l < r) {
+    if (s.charAt(l++) != s.charAt(r--)) return false;
+  }
+  return true;
+}`
+          },
+          {
+            name: "Two Sum",
+            code: `public int[] twoSum(int[] nums, int target) {
   Map<Integer, Integer> map = new HashMap<>();
   for (int i = 0; i < nums.length; i++) {
     int complement = target - nums[i];
@@ -186,18 +155,29 @@
   }
   return new int[] {};
 }`
+          }
+        ]
       }
     ];
 
-    const tableBody = document.getElementById("problem-table");
+    const tbody = document.getElementById("problem-table");
 
-    problems.forEach((problem, index) => {
-      const row = document.createElement("tr");
-      row.innerHTML = `
-        <td>${problem.name}</td>
-        <td><button class="code-btn" onclick="showCode(\`${problem.code}\`)">Code</button></td>
-      `;
-      tableBody.appendChild(row);
+    categories.forEach(cat => {
+      // Insert category header row
+      const catRow = document.createElement("tr");
+      catRow.classList.add("category-row");
+      catRow.innerHTML = `<td colspan="2">${cat.name}</td>`;
+      tbody.appendChild(catRow);
+
+      // Insert problems rows
+      cat.problems.forEach(problem => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${problem.name}</td>
+          <td><button class="code-btn" onclick="showCode(\`${problem.code}\`)">Code</button></td>
+        `;
+        tbody.appendChild(row);
+      });
     });
 
     function showCode(code) {
