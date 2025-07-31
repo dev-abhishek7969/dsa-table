@@ -43,11 +43,14 @@
       align-items: center;
     }
     .modal-content {
-      background: white; color: black;
-      padding: 20px;
-      border-radius: 8px;
-      min-width: 300px;
-      max-width: 700px;
+     background: white;
+  color: black;
+  padding: 20px;
+  border-radius: 8px;
+  min-width: 300px;
+  max-width: 90%; /* or use a fixed size like 1000px */
+  max-height: 90vh;
+  overflow: auto; /* Adds scroll if content is large */
     }
     .close-btn {
       float: right;
