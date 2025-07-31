@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>DSA Problems with Categories</title>
+  <title>DSA Problems with Categories and Subcategories</title>
   <style>
     body {
       font-family: sans-serif;
@@ -29,6 +29,14 @@
       font-weight: bold;
       text-align: center;
       color: #ff00ff;
+      font-size: 1.2em;
+    }
+    .subcategory-row {
+      background-color: #555;
+      font-weight: bold;
+      text-align: left;
+      color: #00ffff;
+      font-size: 1em;
     }
     .code-btn {
       background-color: black;
@@ -38,52 +46,49 @@
       cursor: pointer;
       font-size: 14px;
     }
+    /* Modal styles */
     .modal {
       display: none;
-  position: fixed;
-  z-index: 999;
-  left: 0; top: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0,0,0,0.8);
-  display: flex;          /* Use flexbox for centering */
-  justify-content: center;
-  align-items: center;
+      position: fixed;
+      z-index: 999;
+      left: 0;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
     .modal-content {
       background: white;
-  color: black;
-  padding: 30px;
-  border-radius: 8px;
-  width: 90vw;        /* Wider width relative to viewport */
-  height: 80vh;       /* Taller height relative to viewport */
-  max-width: none;    /* Remove max-width limit */
-  max-height: none;   /* Remove max-height limit */
-  overflow: auto;     /* Scroll if content is too big */
-  box-sizing: border-box;
-  font-size: 16px;    /* Slightly bigger font for readability */
+      color: black;
+      padding: 30px;
+      border-radius: 8px;
+      width: 90vw;
+      height: 80vh;
+      overflow: auto;
+      box-sizing: border-box;
+      font-size: 16px;
+      white-space: pre-wrap;
     }
     .close-btn {
       float: right;
       cursor: pointer;
       font-weight: bold;
-      font-size: 18px;
-    }
-    pre {
-      white-space: pre-wrap;
-      word-wrap: break-word;
-      background: #f4f4f4;
-      padding: 10px;
-      border-radius: 5px;
-      margin-top: 10px;
+      font-size: 22px;
+      color: #444;
     }
   </style>
 </head>
 <body>
-  <h1>Ultimate DSA Problems with Categories</h1>
+  <h1>DSA Problems by Category and Subcategory</h1>
   <table>
     <thead>
-      <tr><th>Problem</th><th>Code</th></tr>
+      <tr>
+        <th>Problem</th>
+        <th>Code</th>
+      </tr>
     </thead>
     <tbody id="problem-table"></tbody>
   </table>
@@ -96,98 +101,83 @@
   </div>
 
   <script>
+    function generateDummyProblems(subcatName, startIndex) {
+      const problems = [];
+      for (let i = 1; i <= 20; i++) {
+        const problemName = `${subcatName} Problem ${startIndex + i}`;
+        const code = `// Code for ${problemName}
+public class Solution {
+  public void solve() {
+    System.out.println("Solving ${problemName}");
+  }
+}`;
+        problems.push({
+          name: problemName,
+          code: code
+        });
+      }
+      return problems;
+    }
+
     const categories = [
       {
         name: "Dynamic Programming",
-        problems: [
-          {
-            name: "Climbing Stairs",
-            code: `public int climbStairs(int n) {
-  if (n <= 2) return n;
-  return climbStairs(n - 1) + climbStairs(n - 2);
-}`
-          },
-          {
-            name: "House Robber",
-            code: `public int rob(int[] nums) {
-  if (nums.length == 0) return 0;
-  if (nums.length == 1) return nums[0];
-  int[] dp = new int[nums.length];
-  dp[0] = nums[0];
-  dp[1] = Math.max(nums[0], nums[1]);
-  for (int i = 2; i < nums.length; i++) {
-    dp[i] = Math.max(dp[i - 1], dp[i - 2] + nums[i]);
-  }
-  return dp[nums.length - 1];
-}`
-          },
-          {
-            name: "Max Subarray (Kadane’s)",
-            code: `public int maxSubArray(int[] nums) {
-  int max = nums[0], curr = nums[0];
-  for (int i = 1; i < nums.length; i++) {
-    curr = Math.max(nums[i], curr + nums[i]);
-    max = Math.max(max, curr);
-  }
-  return max;
-}`
-          }
+        subcategories: [
+          { name: "Linked List" },
+          { name: "Binary Search" },
+          { name: "Stack and Queue" },
         ]
       },
       {
         name: "Two Pointers",
-        problems: [
-          {
-            name: "Check Palindrome",
-            code: `public boolean isPalindrome(String s) {
-  int l = 0, r = s.length() - 1;
-  while (l < r) {
-    if (s.charAt(l++) != s.charAt(r--)) return false;
-  }
-  return true;
-}`
-          },
-          {
-            name: "Two Sum",
-            code: `public int[] twoSum(int[] nums, int target) {
-  Map<Integer, Integer> map = new HashMap<>();
-  for (int i = 0; i < nums.length; i++) {
-    int complement = target - nums[i];
-    if (map.containsKey(complement)) {
-      return new int[] { map.get(complement), i };
-    }
-    map.put(nums[i], i);
-  }
-  return new int[] {};
-}`
-          }
+        subcategories: [
+          { name: "Simple" },
+          { name: "Trickey" },
         ]
       }
     ];
 
+    let runningIndex = 0;
+    categories.forEach(cat => {
+      cat.subcategories.forEach(subcat => {
+        subcat.problems = generateDummyProblems(subcat.name, runningIndex);
+        runningIndex += 20;
+      });
+    });
+
     const tbody = document.getElementById("problem-table");
 
-    categories.forEach(cat => {
-      // Insert category header row
+    categories.forEach(category => {
+      // Category header row
       const catRow = document.createElement("tr");
       catRow.classList.add("category-row");
-      catRow.innerHTML = `<td colspan="2">${cat.name}</td>`;
+      catRow.innerHTML = `<td colspan="2">${category.name}</td>`;
       tbody.appendChild(catRow);
 
-      // Insert problems rows
-      cat.problems.forEach(problem => {
-        const row = document.createElement("tr");
-        row.innerHTML = `
-          <td>${problem.name}</td>
-          <td><button class="code-btn" onclick="showCode(\`${problem.code}\`)">Code</button></td>
-        `;
-        tbody.appendChild(row);
+      category.subcategories.forEach(subcat => {
+        // Subcategory row
+        const subcatRow = document.createElement("tr");
+        subcatRow.classList.add("subcategory-row");
+        subcatRow.innerHTML = `<td colspan="2">${subcat.name}</td>`;
+        tbody.appendChild(subcatRow);
+
+        // Problems for this subcategory
+        subcat.problems.forEach(problem => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td>${problem.name}</td>
+            <td><button class="code-btn" onclick="showCode(\`${problem.code}\`)">Code</button></td>
+          `;
+          tbody.appendChild(row);
+        });
       });
     });
 
     function showCode(code) {
-      document.getElementById("codeText").textContent = code;
-      document.getElementById("codeModal").style.display = "flex";
+      const modal = document.getElementById("codeModal");
+      const codeText = document.getElementById("codeText");
+      codeText.textContent = code || "// Code not added yet";
+      modal.style.display = "flex";
     }
 
     function closeModal() {
