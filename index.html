@@ -334,6 +334,47 @@ private int getListLength(ListNode head) {
       },
       ...generateDummyProblems("Stack and Queue", 2)
     ];
+// Two Pointer problems
+const twoPointerCategory = categories.find(cat => cat.name === "Two Pointer");
+twoPointerCategory.problems = [
+  {
+    name: "Is palindrome",
+    code: `/**
+ * Input: s = "A man, a plan, a canal: Panama" 
+ * Output: true 
+ * Explanation: "amanaplanacanalpanama" is a palindrome.
+ * 
+ * @param s
+ * @return
+ */
+public static boolean isPalindrome(String s) {
+  if (s.isEmpty())
+    return true;
+
+  int start = 0;
+  int end = s.length() - 1;
+
+  while (start < end) {
+    char first = s.charAt(start);
+    char last = s.charAt(end);
+
+    if (!Character.isLetterOrDigit(first)) {
+      start++;
+    } else if (!Character.isLetterOrDigit(last)) {
+      end--;
+    } else {
+      if (Character.toLowerCase(first) != Character.toLowerCase(last)) {
+        return false;
+      }
+      start++;
+      end--;
+    }
+  }
+  return true;
+}`
+  },
+  ...generateDummyProblems("Two Pointer", 1)
+];
 
     // Fill others with dummy problems
     categories.forEach(cat => {
