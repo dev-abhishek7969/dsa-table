@@ -121,7 +121,8 @@ public class Solution {
       { name: "Stack and Queue", problems: [] },
       { name: "Two Pointer", problems: [] },
       { name: "Sliding Window", problems: [] },
-      { name: "Longest-Reverse", problems: [] }
+      { name: "Longest-Reverse", problems: [] },
+	  { name: "Memoization", problems: [] }
     ];
 
     // Linked List problems
@@ -827,6 +828,28 @@ longestReverseCategory.problems = [
         code: ``
      },
 ];
+
+// Memoization problems
+const memoizationCategory = categories.find(cat => cat.name === "Memoization");
+memoizationCategory.problems = [
+  {
+    name: "Climb Stairs",
+    code: `public int climbStairs(int n) {
+        if (n == 1)
+		return 1;
+        
+        int[] dp = new int[n + 1];
+        dp[1] = 1;
+        dp[2] = 2;
+
+        for (int i = 3; i <= n; i++) {
+            dp[i] = dp[i - 1] + dp[i -2];
+        }
+        return dp[n]; 
+    }`
+  },
+];
+
 
 
     // Fill others with dummy problems
