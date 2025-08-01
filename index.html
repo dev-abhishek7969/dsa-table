@@ -707,6 +707,54 @@ slidingWindowCategory.problems = [
 		return (double) maxSum / k;
 	}`
   },
+  
+  {
+        name: "Find All Anagrams in a String",
+        code: `//Input: s = "cbaebabacd", p = "abc" Output: [0,6]
+	public static List<Integer> findAnagrams(String s, String p) {
+
+		int[] pArr = new int[26];
+		int[] sArr = new int[26];
+		List<Integer> result = new java.util.ArrayList<>();
+
+		for (char c : p.toCharArray()) {
+			pArr[c - 'a']++;
+		}
+
+		for (int i = 0; i < s.length(); i++) {
+
+			sArr[s.charAt(i) - 'a']++;
+
+			if (i >= p.length()) {
+				sArr[s.charAt(i -p.length()) - 'a']--;
+			}
+
+			if (Arrays.equals(pArr, sArr)) {
+				result.add(i - p.length() + 1);
+			}
+		}
+		return result;
+	}`
+  },
+  
+  {
+        name: "Maximum Subarray",
+        code: `//nums = [-2,1,-3,4,-1,2,1,-5,4].The subarray [4,-1,2,1] has the largest sum 6
+	public int maxSubArray(int[] nums) {
+		int maxSum = nums[0];
+		int currentSum = 0;
+
+		for (int i = 0; i < nums.length; i++) {
+			if (currentSum < 0) {
+				currentSum = 0;
+			}
+			currentSum = currentSum + nums[i];
+			maxSum = Math.max(currentSum, maxSum);
+		}
+		return maxSum;
+	}`
+  },
+	 
 ];
 
 
