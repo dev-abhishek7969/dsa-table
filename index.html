@@ -139,7 +139,8 @@ public class Solution {
       { name: "Sliding Window", problems: [] },
       { name: "Longest-Reverse", problems: [] },
       { name: "Memoization", problems: [] },
-      { name: "HashMap DS", problems: [] }
+      { name: "HashMap DS", problems: [] },
+      { name: "Brain Teasers", problems: [] }
     ];
 
     // Linked List problems
@@ -969,6 +970,35 @@ class Solution {
       }
     }
     return true;		
+    }
+}`
+  },
+];
+
+
+// Two Pointer problems
+const brainTeasersCategory = categories.find(cat => cat.name === "Brain Teasers");
+brainTeasersCategory.problems = [
+  {
+    name: "Left and Right Sum Differences",
+    code: `//Input: nums = [10,4,8,3] Output: [15,1,11,22] || leftSum is [0,10,14,22],rightSum is [15,11,3,0]
+class Solution {
+    public int[] leftRightDifference(int[] nums) {       
+
+		int rightSum = 0;
+		int leftSum = 0;
+
+		for (int i : nums) {
+			rightSum += i;//25
+		}
+
+		for (int i = 0; i < nums.length; i++) {
+			int val = nums[i];
+			rightSum = rightSum - val;//(25-10)=15|(15-4) = 11 |(11-8) = 3|(3-3)=0
+			nums[i] = Math.abs(leftSum - rightSum);  //(0 -15)=15 |(10-11)=1 |(14-3)=11|(22-0)=22
+			leftSum = leftSum + val; //(0+10)=10|(10+4)=14|(14+8)=22
+		}
+		return nums;	
     }
 }`
   },
