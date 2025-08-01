@@ -337,6 +337,7 @@ private int getListLength(ListNode head) {
 // Two Pointer problems
 const twoPointerCategory = categories.find(cat => cat.name === "Two Pointer");
 twoPointerCategory.problems = [
+  
   {
     name: "Is palindrome",
     code: `/**
@@ -373,6 +374,97 @@ public static boolean isPalindrome(String s) {
   return true;
 }`
   },
+  
+     {
+        name: "Reverse only letters",
+        code: `/**
+	 * input - "ab-cd*edf"
+	 * output - "fd-ed*cba"
+	 * @param s
+	 * @return
+	 */
+	public static String reverseOnlyLetters(String s) {
+		char[] ch = s.toCharArray();
+
+		int left = 0;
+		int right = ch.length - 1;
+
+		while (left < right) {
+			if (!Character.isLetter(ch[left])) {
+				left++;
+			} else if (!Character.isLetter(ch[right])) {
+				right--;
+			} else {
+				char temp = ch[left];
+				ch[left] = ch[right];
+				ch[right] = temp;
+				left++;
+				right--;
+			}
+		}
+		return new String(ch);
+	}`
+     },
+	 
+	{
+        name: "Three sum",
+        code: `/**
+	 * Input: nums = [-1,0,1,2,-1,-4] Output: [[-1,-1,2],[-1,0,1]] 
+	 */
+	public static List<List<Integer>> threeSum(int[] arr) {
+
+		if (arr == null || arr.length < 3)
+			return new ArrayList<>();
+
+		Arrays.sort(arr);
+		Set<List<Integer>> result = new HashSet<>();
+
+		for (int i = 0; i < arr.length - 2; i++) {
+
+			int left = 0;
+			int right = arr.length - 1;
+
+			while (left < right) {
+				int sum = arr[i] + arr[left] + arr[right];
+
+				if (sum == 0) {
+					result.add(Arrays.asList(arr[i], arr[left], arr[right]));
+					left++;
+					right--;
+				} else if (sum < 0) {
+					left++;
+				} else {
+					right--;
+				}
+			}
+		}
+
+		return new ArrayList<>(result);
+	}`
+     },
+	 
+	{
+        name: "Two sum sorted array",
+        code: `public static int[] twoSum(int[] nums, int target) {
+		int first = 0;
+		int last = nums.length-1;
+		while(first < last) {
+			int sum = nums[first]+nums[last];
+			
+			if(sum == target) {
+				break;
+			}
+			else if(sum > target) {
+				last --;
+			}
+			else {
+				first++;
+			}
+		}
+		System.out.println(first+"---"+last);
+		return new int[] {first,last} ;
+	}`
+     },
   ...generateDummyProblems("Two Pointer", 1)
 ];
 
