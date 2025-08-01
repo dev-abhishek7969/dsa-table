@@ -673,6 +673,37 @@ public static boolean isPalindrome(String s) {
 		return new int[] {first,last} ;
 	}`
      },
+	 
+	  {
+        name: "Reverse Words In A String III ",
+        code: `//welcome to --> emoclew ot
+
+	public static String reverseWords(String s) {
+		String param[] = s.split(" ");
+		StringBuffer result = new StringBuffer();
+
+		for (String ss : param) {
+			result.append(reverse(ss) + " ");
+		}
+		return result.toString().trim();
+	}
+
+	private static String reverse(String ss) {
+		int left = 0;
+		int right = ss.length() - 1;
+
+		char[] ch = ss.toCharArray();
+		while (left < right) {
+			char temp = ch[left];
+			ch[left] = ch[right];
+			ch[right] = temp;
+			left++;
+			right--;
+		}
+		return new String(ch);
+	}`
+     },
+	 
   //...generateDummyProblems("Two Pointer", 1)
 ];
 
@@ -755,6 +786,46 @@ slidingWindowCategory.problems = [
 	}`
   },
 	 
+];
+
+
+//Longest-Reverse problems
+const longestReverseCategory = categories.find(cat => cat.name === "Longest-Reverse");
+longestReverseCategory.problems = [
+  {
+    name: "Reverse Prefix of Word",
+    code: `//Input: word = "abcdefd", ch = "d"	Output: "dcbaefd"
+	
+	public static String reversePrefix(String word, char ch) {
+
+		if (firstOccurance == -1) {
+			return word;
+		}
+
+		int firstOccurance = word.indexOf(ch);
+		Stack<Character> stack = new Stack<>();
+		
+		for (int i = 0; i <= firstOccurance; i++) {
+			stack.push(word.charAt(i));
+		}
+
+		StringBuffer result = new StringBuffer();
+		while (!stack.isEmpty()) {
+			result.append(stack.pop());
+		}
+
+		for (int j = firstOccurance + 1; j < word.length(); j++) {
+			result.append(word.charAt(j));
+		}
+
+		return result.toString();
+	}`
+  },
+  
+  {
+        name: "53. Maximum Subarray",
+        code: ``
+     },
 ];
 
 
