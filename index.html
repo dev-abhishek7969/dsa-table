@@ -132,6 +132,7 @@ public class Solution {
     }
 
     const categories = [
+      { name: "Easy Problems", problems: [] },
       { name: "Linked List", problems: [] },
       { name: "Binary Search", problems: [] },
       { name: "Stack and Queue", problems: [] },
@@ -1018,8 +1019,66 @@ for (int i = 0; i < nums.length; i++) {
   }
 }`
   },
+
+  {
+        name: "Find All Duplicates in an Array",
+        code: `//Input: nums = [4,3,2,7,8,2,3,1] Output: [2,3]
+    public List<Integer> findDuplicates(int[] nums) {
+        List<Integer> resultSet = new ArrayList<>();		
+		for(int i=0; i< nums.length; i++) {			
+			int index = Math.abs(nums[i])-1;
+			if(nums[index] <0) {
+				resultSet.add(index+1);
+			}
+			nums[index] = nums[index]*-1;
+		}
+		return resultSet;
+    }`
+  },
+
+  {
+        name: "Sum of Unique Elements",
+        code: `//Input: nums = [1,2,3,2] Output: 4
+    //We can use array index as values of nums    
+    public int sumOfUnique(int[] nums) {
+        // size is given in question
+        int[] freq = new int[101];
+		for (int index : nums) {
+			freq[index] = freq[index] + 1;
+
+		}
+		int sum = 0;
+		for (int i = 0; i < freq.length; i++) {
+			if (freq[i] == 1) {
+				sum = sum + i;
+			}
+		}
+		return sum;
+    }`
+  },
 ];
 
+// Easy problems
+const easyCategory = categories.find(cat => cat.name === "Easy Problems");
+easyCategory.problems = [
+  {
+    name: "Max Consecutive Ones",
+    code: `//input nums= [1,1,0,1,1,1] output =3
+    public int findMaxConsecutiveOnes(int[] nums) {
+        int count = 0;
+    	int maxCount = 0;
+    	for(int i = 0 ; i <nums.length ; i++) {
+    		if(nums[i] == 1) {
+    			count++;
+    			maxCount = Math.max(count, maxCount);
+    		}else {
+    			count = 0;
+    		}
+    	}        
+    	return maxCount;
+    }`
+  },
+];
 
 
     // Fill others with dummy problems
