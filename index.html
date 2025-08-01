@@ -127,6 +127,38 @@ public class Solution {
     // Linked List problems
     const linkedListCategory = categories.find(cat => cat.name === "Linked List");
     linkedListCategory.problems.push(
+	
+	 {
+        name: "Merge two linked list",
+        code: `public static ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+		
+		ListNode returnNode = new ListNode(Integer.MIN_VALUE);
+		
+		ListNode headNode = returnNode;
+		
+		while(l1 != null && l2 != null){
+			if(l1.val <= l2.val) {
+				returnNode.next= l1;
+				l1=l1.next;
+			}
+			else {
+				returnNode.next=l2;
+				l2=l2.next;
+			}
+			
+			returnNode = returnNode.next;			
+		}
+
+		if(l1 == null) {
+			returnNode.next=l2;
+		}
+		else if(l2 == null) {
+			returnNode.next=l1;
+		}
+		return headNode;
+	   }`
+     },
+	  
       {
         name: "Detect cycle in linked list",
         code: `public ListNode detectCycle(ListNode head) {
