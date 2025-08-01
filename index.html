@@ -256,8 +256,31 @@ private int getListLength(ListNode head) {
   }
   return len;
 }`
-      }
-    );
+      },
+
+  {
+    name: "Remove Duplicates from Sorted List",
+    code: `//Input: head = [1,1,2,3,3] Output: [1,2,3]
+    public ListNode deleteDuplicates(ListNode head) {
+       public ListNode deleteDuplicates(ListNode head) {  
+
+        ListNode curr = head;        
+        while(curr != null && curr.next != null)
+        {
+            if(curr.val == curr.next.val){
+               curr.next = curr.next.next;
+            }
+            else{
+                curr = curr.next;  
+            }
+        }
+        return head;
+      } 
+    }`
+  }
+
+
+  );
     //linkedListCategory.problems.push(...generateDummyProblems("Linked List", 2));
 
     // Binary Search problems
