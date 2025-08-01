@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <title>DSA Problem Table</title>
@@ -11,21 +12,26 @@
       margin: 0;
       padding: 20px;
     }
+
     table {
       width: 100%;
       border-collapse: collapse;
       margin-bottom: 60px;
     }
-    th, td {
+
+    th,
+    td {
       border: 1px solid #444;
       padding: 10px;
       text-align: left;
     }
+
     .category-row {
       background-color: #333;
       font-weight: bold;
       cursor: pointer;
     }
+
     .code-btn {
       background-color: #007bff;
       color: #fff;
@@ -33,9 +39,11 @@
       padding: 6px 12px;
       cursor: pointer;
     }
+
     .code-btn:hover {
       background-color: #0056b3;
     }
+
     #codeModal {
       display: none;
       position: fixed;
@@ -44,10 +52,11 @@
       top: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0,0,0,0.6);
+      background-color: rgba(0, 0, 0, 0.6);
       align-items: center;
       justify-content: center;
     }
+
     #codeModalContent {
       background-color: #ffffff;
       color: #000000;
@@ -58,33 +67,40 @@
       max-height: 90%;
       overflow: auto;
     }
+
     pre {
       white-space: pre-wrap;
       color: #000000;
       font-family: Consolas, monospace;
     }
+
     .close-btn {
       float: right;
       font-size: 20px;
       cursor: pointer;
       color: #666;
     }
+
     .close-btn:hover {
       color: #000;
     }
+
     .toggle-icon {
       float: right;
       font-size: 16px;
       color: #ccc;
     }
+
     .hidden {
       display: none;
     }
+
     .category-row:hover {
       background-color: #444;
     }
   </style>
 </head>
+
 <body>
 
   <h1>DSA Problem Table</h1>
@@ -122,13 +138,13 @@ public class Solution {
       { name: "Two Pointer", problems: [] },
       { name: "Sliding Window", problems: [] },
       { name: "Longest-Reverse", problems: [] },
-	  { name: "Memoization", problems: [] }
+      { name: "Memoization", problems: [] }
     ];
 
     // Linked List problems
     const linkedListCategory = categories.find(cat => cat.name === "Linked List");
-    linkedListCategory.problems.push(	
-	 {
+    linkedListCategory.problems.push(
+      {
         name: "Merge two linked list",
         code: `public static ListNode mergeTwoLists(ListNode l1, ListNode l2) {		
 		ListNode returnNode = new ListNode(Integer.MIN_VALUE);		
@@ -152,9 +168,9 @@ public class Solution {
 		}
 		return headNode;
 	   }`
-     },
-	 
-	 {
+      },
+
+      {
         name: "Middle node of linked list",
         code: `public static ListNode middleNode(ListNode head) {
 		ListNode slowPtr = head;
@@ -166,9 +182,9 @@ public class Solution {
 		}
 		return slowPtr;
 	  }`
-     },
-	 
-	 {
+      },
+
+      {
         name: "Is given linked list circular",
         code: `public boolean hasCycle(ListNode head) {
 		ListNode slowPtr = head;
@@ -186,9 +202,9 @@ public class Solution {
 		return false;
 
 	}`
-     },
-	 
-	  
+      },
+
+
       {
         name: "Starting point of cycle in linked list",
         code: `public ListNode detectCycle(ListNode head) {
@@ -263,8 +279,8 @@ private int getListLength(ListNode head) {
   return -1;
 }`
       },
-	  
-	 {
+
+      {
         name: "Find Minimum in Rotated Sorted Array",
         code: `/**
 	 * Input: nums = [3,4,5,1,2] Output: 1
@@ -285,9 +301,9 @@ private int getListLength(ListNode head) {
 		}
 		return nums[left];
 	}`
-     },
-	 
-	 {
+      },
+
+      {
         name: "Ceiling",
         code: `//The least integer number greater than or equal to the given number
 	static int ceiling(int[] arr, int target) {
@@ -311,9 +327,9 @@ private int getListLength(ListNode head) {
 		}
 		return start;
 	}`
-     },
-	 
-	 {
+      },
+
+      {
         name: "Floor",
         code: `static int floor(int[] arr, int target) {
 		int start = 0;
@@ -336,9 +352,9 @@ private int getListLength(ListNode head) {
 		}
 		return end;
 	}`
-     },
-	 
-	 {
+      },
+
+      {
         name: "Order Agnostic Binary Search",
         code: `public static int OrderAgnosticBs(int arr[], int target) {
 		int start = 0;
@@ -370,9 +386,9 @@ private int getListLength(ListNode head) {
 		}
 		return -1;
 	}`
-     },
-	 
-	 {
+      },
+
+      {
         name: "Find First and Last Position of Element in Sorted Array",
         code: `/**
 	 * Input: nums = [5,7,7,8,8,10], target = 8 Output: [3,4]
@@ -411,9 +427,9 @@ private int getListLength(ListNode head) {
 		}
 		return ans;
 	}`
-     },
-	 
-	 {
+      },
+
+      {
         name: "Find Smallest Letter Greater Than Target",
         code: `/**
 	 * Input: letters = ["c","f","j"], target = "c" Output: "f"
@@ -434,14 +450,14 @@ private int getListLength(ListNode head) {
 		}
 		return letters[start % (letters.length)];
 	}`
-     },
-	 
-	 
+      },
+
+
       //...generateDummyProblems("Binary Search", 1)
     ];
 
     // Stack and Queue problems
-  const stackQueueCategory = categories.find(cat => cat.name === "Stack and Queue");
+    const stackQueueCategory = categories.find(cat => cat.name === "Stack and Queue");
     stackQueueCategory.problems = [
       {
         name: "Min Stack",
@@ -507,8 +523,8 @@ private int getListLength(ListNode head) {
   }
 }`,
       },
-	  
-	 {
+
+      {
         name: "Implement Queue using Stack",
         code: `public class QueueUsingStack {
 
@@ -543,18 +559,18 @@ private int getListLength(ListNode head) {
 	}
 }
 `
-     },
+      },
       //...generateDummyProblems("Stack and Queue", 2)
     ];
-	
-	
-// Two Pointer problems
-const twoPointerCategory = categories.find(cat => cat.name === "Two Pointer");
-twoPointerCategory.problems = [
-  
-  {
-    name: "Is palindrome",
-    code: `/**
+
+
+    // Two Pointer problems
+    const twoPointerCategory = categories.find(cat => cat.name === "Two Pointer");
+    twoPointerCategory.problems = [
+
+      {
+        name: "Is palindrome",
+        code: `/**
  * Input: s = "A man, a plan, a canal: Panama" 
  * Output: true 
  * Explanation: "amanaplanacanalpanama" is a palindrome.
@@ -587,9 +603,9 @@ public static boolean isPalindrome(String s) {
   }
   return true;
 }`
-  },
-  
-     {
+      },
+
+      {
         name: "Reverse only letters",
         code: `/**
 	 * input - "ab-cd*edf"
@@ -618,9 +634,9 @@ public static boolean isPalindrome(String s) {
 		}
 		return new String(ch);
 	}`
-     },
-	 
-	{
+      },
+
+      {
         name: "Three sum",
         code: `/**
 	 * Input: nums = [-1,0,1,2,-1,-4] Output: [[-1,-1,2],[-1,0,1]] 
@@ -652,9 +668,9 @@ public static boolean isPalindrome(String s) {
 		return new ArrayList<>(result);
 	}
 	`
-     },
-	 
-	{
+      },
+
+      {
         name: "Two sum sorted array",
         code: `public static int[] twoSum(int[] nums, int target) {
 		int first = 0;
@@ -673,9 +689,9 @@ public static boolean isPalindrome(String s) {
 		}
 		return new int[] {first,last} ;
 	}`
-     },
-	 
-	  {
+      },
+
+      {
         name: "Reverse Words In A String III ",
         code: `//welcome to --> emoclew ot
 
@@ -703,18 +719,18 @@ public static boolean isPalindrome(String s) {
 		}
 		return new String(ch);
 	}`
-     },
-	 
-  //...generateDummyProblems("Two Pointer", 1)
-];
+      },
+
+      //...generateDummyProblems("Two Pointer", 1)
+    ];
 
 
-// Sliding window problems
-const slidingWindowCategory = categories.find(cat => cat.name === "Sliding Window");
-slidingWindowCategory.problems = [
-  {
-    name: "Maximum Average Subarray I",
-    code: `//Input: nums = [1,12,-5,-6,50,3], k = 4 Output: 12.75 , (12 - 5 - 6 + 50) / 4 = 51 / 4 = 12.75	 
+    // Sliding window problems
+    const slidingWindowCategory = categories.find(cat => cat.name === "Sliding Window");
+    slidingWindowCategory.problems = [
+      {
+        name: "Maximum Average Subarray I",
+        code: `//Input: nums = [1,12,-5,-6,50,3], k = 4 Output: 12.75 , (12 - 5 - 6 + 50) / 4 = 51 / 4 = 12.75	 
 	 
 	public double findMaxAverage(int[] nums, int k) {
 		int windowSum = 0;
@@ -736,9 +752,9 @@ slidingWindowCategory.problems = [
 		}
 		return (double) maxSum / k;
 	}`
-  },
-  
-  {
+      },
+
+      {
         name: "Find All Anagrams in a String",
         code: `//Input: s = "cbaebabacd", p = "abc" Output: [0,6]
 	
@@ -766,9 +782,9 @@ slidingWindowCategory.problems = [
 		}
 		return result;
 	}`
-  },
-  
-  {
+      },
+
+      {
         name: "Maximum Subarray",
         code: `//nums = [-2,1,-3,4,-1,2,1,-5,4].The subarray [4,-1,2,1] has the largest sum 6
 	
@@ -785,17 +801,17 @@ slidingWindowCategory.problems = [
 		}
 		return maxSum;
 	}`
-  },
-	 
-];
+      },
+
+    ];
 
 
-//Longest-Reverse problems
-const longestReverseCategory = categories.find(cat => cat.name === "Longest-Reverse");
-longestReverseCategory.problems = [
-  {
-    name: "Reverse Prefix of Word",
-    code: `//Input: word = "abcdefd", ch = "d"	Output: "dcbaefd"
+    //Longest-Reverse problems
+    const longestReverseCategory = categories.find(cat => cat.name === "Longest-Reverse");
+    longestReverseCategory.problems = [
+      {
+        name: "Reverse Prefix of Word",
+        code: `//Input: word = "abcdefd", ch = "d"	Output: "dcbaefd"
 	
 	public static String reversePrefix(String word, char ch) {
 
@@ -821,20 +837,20 @@ longestReverseCategory.problems = [
 
 		return result.toString();
 	}`
-  },
-  
-  {
+      },
+
+      {
         name: "53. Maximum Subarray",
         code: ``
-     },
-];
+      },
+    ];
 
-// Memoization problems
-const memoizationCategory = categories.find(cat => cat.name === "Memoization");
-memoizationCategory.problems = [
-  {
-    name: "Climb Stairs",
-    code: `public int climbStairs(int n) {
+    // Memoization problems
+    const memoizationCategory = categories.find(cat => cat.name === "Memoization");
+    memoizationCategory.problems = [
+      {
+        name: "Climb Stairs",
+        code: `public int climbStairs(int n) {
         if (n == 1)
 		return 1;
         
@@ -847,31 +863,78 @@ memoizationCategory.problems = [
         }
         return dp[n]; 
     }`
-  },
-  
-  {
+      },
+
+      {
         name: "Coin change",
         code: `public int coinChange(int[] coins, int amount) {
-    // Check edge case
-    if (amount < 1) return 0;
+      // Check edge case
+      if (amount < 1) return 0;
 
-    // Create DP array
-    int[] minCoinsDP = new int[amount + 1];
+      // Create DP array
+      int[] minCoinsDP = new int[amount + 1];
 
-    for (int i = 1; i <= amount; i++) {
+      for (int i = 1; i <= amount; i++) {
 
-      minCoinsDP[i] = Integer.MAX_VALUE;
+        minCoinsDP[i] = Integer.MAX_VALUE;
 
-      // Try each coin
-      for (int coin : coins) {
-        if (coin <= i && minCoinsDP[i - coin] != Integer.MAX_VALUE)
-          minCoinsDP[i] = Math.min(minCoinsDP[i], 1 + minCoinsDP[i - coin]);
+        // Try each coin
+        for (int coin : coins) {
+          if (coin <= i && minCoinsDP[i - coin] != Integer.MAX_VALUE)
+            minCoinsDP[i] = Math.min(minCoinsDP[i], 1 + minCoinsDP[i - coin]);
+        }
       }
-    }
-    return minCoinsDP[amount] == Integer.MAX_VALUE ? -1 : minCoinsDP[amount];
-    }`
-  },
-];
+      return minCoinsDP[amount] == Integer.MAX_VALUE ? -1 : minCoinsDP[amount];
+      }`
+      },
+
+      {
+        name: "Longest Palindromic Substring",
+        code: `String longestPalindrome(String str) {
+
+		if (str.length() <= 1)
+			return str;
+
+		String LPS = "";
+
+		for (int i = 1; i < str.length(); i++) {
+
+			// Consider odd length----------------------------------------
+			int low = i;
+			int high = i;
+			while (str.charAt(low) == str.charAt(high)) {
+				low--;
+				high++;
+
+				if (low == -1 || high == str.length())
+					break;
+			}
+
+			String palindrome = str.substring(low + 1, high);
+			if (palindrome.length() > LPS.length()) {
+				LPS = palindrome;
+			}
+
+			// Consider even length---------------------------------------
+			low = i - 1;
+			high = i;
+			while (str.charAt(low) == str.charAt(high)) {
+				low--;
+				high++;
+
+				if (low == -1 || high == str.length())
+					break;
+			}
+
+			palindrome = str.substring(low + 1, high);
+			if (palindrome.length() > LPS.length()) {
+				LPS = palindrome;
+			}
+		}
+		return LPS;
+	}`
+      },
+    ];
 
 
 
@@ -927,4 +990,5 @@ memoizationCategory.problems = [
   </script>
 
 </body>
+
 </html>
